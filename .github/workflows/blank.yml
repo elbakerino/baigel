@@ -54,27 +54,27 @@ jobs:
                         --build-arg CI_RUN_URL=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} \
                         --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
                         --build-arg VERSION=${{ steps.short_ref.outputs.short_ref }} \
-                        -t ghcr.io/elbakerino/baistro -f Dockerfile .
+                        -t ghcr.io/elbakerino/baigel -f Dockerfile .
 
             -   name: Publish image `api` as `develop`
                 if: github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/heads/feature/')
                 # todo: would images per feature bloat the registry or a good idea? maybe together with a cleanup when closing the feature branch/PR
                 run: |
-                    docker tag ghcr.io/elbakerino/baistro ghcr.io/elbakerino/baistro:develop
-                    docker push ghcr.io/elbakerino/baistro:develop
+                    docker tag ghcr.io/elbakerino/baigel ghcr.io/elbakerino/baigel:develop
+                    docker push ghcr.io/elbakerino/baigel:develop
 
             -   name: Publish image `api` as `main`
                 if: github.ref == 'refs/heads/main'
                 run: |
-                    docker tag ghcr.io/elbakerino/baistro ghcr.io/elbakerino/baistro:main
-                    docker push ghcr.io/elbakerino/baistro:main
+                    docker tag ghcr.io/elbakerino/baigel ghcr.io/elbakerino/baigel:main
+                    docker push ghcr.io/elbakerino/baigel:main
 
             -   name: Publish image `api` tagged & latest
                 if: startsWith(github.ref, 'refs/tags/')
                 env:
                     RELEASE_VERSION: ${{ steps.short_ref.outputs.short_ref }}
                 run: |
-                    docker tag ghcr.io/elbakerino/baistro ghcr.io/elbakerino/baistro:$RELEASE_VERSION
-                    docker push ghcr.io/elbakerino/baistro:$RELEASE_VERSION
-                    docker tag ghcr.io/elbakerino/baistro ghcr.io/elbakerino/baistro:latest
-                    docker push ghcr.io/elbakerino/baistro:latest
+                    docker tag ghcr.io/elbakerino/baigel ghcr.io/elbakerino/baigel:$RELEASE_VERSION
+                    docker push ghcr.io/elbakerino/baigel:$RELEASE_VERSION
+                    docker tag ghcr.io/elbakerino/baigel ghcr.io/elbakerino/baigel:latest
+                    docker push ghcr.io/elbakerino/baigel:latest

@@ -6,10 +6,10 @@ ARG CI_RUN_URL
 ARG BUILD_DATE
 ARG VERSION
 
-LABEL org.opencontainers.image.source="https://github.com/elbakerino/baistro"
+LABEL org.opencontainers.image.source="https://github.com/elbakerino/baigel"
 LABEL org.opencontainers.image.authors="Michael Becker, https://i-am-digital.eu"
-LABEL org.opencontainers.image.title="baistro"
-LABEL org.opencontainers.image.version="0.1.0"
+LABEL org.opencontainers.image.title="baigel"
+LABEL org.opencontainers.image.version="0.0.1"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.source=$VCS_URL
 LABEL org.opencontainers.image.revision=$VCS_REF
@@ -54,8 +54,8 @@ COPY ./LICENSE LICENSE
 FROM base AS dev
 
 # note: with `poetry sync`/`--sync` lead to `poetry not found` error; WHEN `POETRY_VIRTUALENVS_CREATE=false` is set
-#CMD poetry lock --no-interaction && poetry install --no-interaction && exec poetry run flask --app baistro.server:app --debug run --host 0.0.0.0 --port ${PORT}
-CMD poetry lock --no-interaction && poetry sync --no-interaction && poetry install --no-interaction && exec poetry run flask --app baistro.server:app --debug run --host 0.0.0.0 --port ${PORT}
+#CMD poetry lock --no-interaction && poetry install --no-interaction && exec poetry run flask --app baigel.server:app --debug run --host 0.0.0.0 --port ${PORT}
+CMD poetry lock --no-interaction && poetry sync --no-interaction && poetry install --no-interaction && exec poetry run flask --app baigel.server:app --debug run --host 0.0.0.0 --port ${PORT}
 
 FROM base
 
@@ -68,9 +68,9 @@ RUN poetry sync --without dev -E gunicorn --no-cache --no-root --no-interaction
 # note: with `--compile` the image was ~150MB larger, no measurable performance gain (or unknown how to check)
 #--compile
 
-COPY ./baistro /app/baistro
+COPY ./baigel /app/baigel
 
 ENV GUN_W 2
 
 # note: kept gettings `command not found: gunicorn`, until added `POETRY_VIRTUALENVS_CREATE=false`; now no longer reproducible
-CMD exec poetry run gunicorn -w ${GUN_W} baistro.server:app
+CMD exec poetry run gunicorn -w ${GUN_W} baigel.server:app

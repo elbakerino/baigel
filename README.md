@@ -1,8 +1,8 @@
-# baistro · AI APIs
+# baigel · AI APIs
 
-[![Github actions Build](https://github.com/elbakerino/baistro/actions/workflows/blank.yml/badge.svg)](https://github.com/elbakerino/baistro/actions)
+[![Github actions Build](https://github.com/elbakerino/baigel/actions/workflows/blank.yml/badge.svg)](https://github.com/elbakerino/baigel/actions)
 
-Some APIs around AI models.
+Experiments around APIs for (image/document) AI models.
 
 - CPU only docker setup
 - Expects preloaded models, no (annoying) auto-downloads
@@ -10,33 +10,11 @@ Some APIs around AI models.
 
 ## Tasks & Models
 
-> 💎 = most stable
->
-> ⚗️ = very experimental / unstable
-
-### Vector Space Representations
-
-> by [Sentence-Transformers](https://www.sbert.net/)
-
-- Text / Sentences 💎
-- Image
-- Code 💎
-
-### Linguistic Analysis
-
-> by [Stanza](https://stanfordnlp.github.io/stanza/pipeline.html) 💎
-
-- Locale Identification
-- Sentence Segmentation
-- Token Classification (NER, POS, MWT)
-- Sequence Classification (Sentiment)
-- Lemmatization
-
 ### Document Processing
 
-- Image to Data (by `donut`) ⚗️
+- Image to Data (by `donut`)
 - Visual Document Question Answering (Image) (by `donut`)
-- *WIP* Document Classification (Image) (by `dit`) ⚗️
+- *WIP* Document Classification (Image) (by `dit`)
     - (dataset) RVL-CDIP: `"letter", "form", "email", "handwritten", "advertisement", "scientific report", "scientific publication", "specification", "file folder", "news article", "budget", "invoice", "presentation", "questionnaire", "resume", "memo"`
 
 ### NLI / QA / QAG / QG
@@ -44,15 +22,9 @@ Some APIs around AI models.
 > general Natural Language Inference
 
 - Question Answering
-- Question Answer Generation ⚗️
-- Question Generation ⚗️
-- Question Natural Language Inference / QNLI 💎
-
-### Task Implementations
-
-- Semantic Search 💎
-- *WIP* Sentence Clustering
-- *todo* Topic Clustering (by [BERTopic](https://maartengr.github.io/BERTopic/))
+- Question Answer Generation
+- Question Generation
+- Question Natural Language Inference / QNLI
 
 ## Usage
 
@@ -69,19 +41,16 @@ Run CLI in docker container:
 
 ```shell
 # build container before using cli (if never `up`ed before)
-docker compose build baistro
+docker compose build baigel
 
 # open shell in container:
-docker compose run --rm baistro bash
+docker compose run --rm baigel bash
 
 # run cli help:
 poetry run cli
 
 # download models:
 poetry run cli download
-
-# download model `stanza-multilingual` directly:
-poetry run cli download stanza-multilingual
 
 # list models:
 poetry run cli models
@@ -96,11 +65,11 @@ poetry lock
 poetry sync --no-root
 poetry install
 
-# poetry lock && poetry sync --no-root && poetry install
+# poetry lock --regenerate && poetry sync --no-root && poetry install
 ```
 
 ## License
 
-This project is distributed as **free software** under the **MIT License**, see [License](https://github.com/elbakerino/baistro/blob/main/LICENSE).
+This project is distributed as **free software** under the **MIT License**, see [License](https://github.com/elbakerino/baigel/blob/main/LICENSE).
 
 © 2024 Michael Becker https://i-am-digital.eu

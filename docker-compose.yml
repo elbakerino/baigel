@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-    baistro:
+    baigel:
         build:
             context: .
             dockerfile: Dockerfile
@@ -12,20 +12,20 @@ services:
         environment:
             PORT: 80
             APP_ENV: local
-            SERVICE_NAME: baistro
+            SERVICE_NAME: baigel
             SERVICE_NAMESPACE: bai
         volumes:
             # note: only use the cache mounts for the `dev` image
-            - baistro_0_poetry:/root/.cache/pypoetry
-            - baistro_0_pip:/root/.cache/pip
-            - ./baistro:/app/baistro
+            - baigel_0_poetry:/root/.cache/pypoetry
+            - baigel_0_pip:/root/.cache/pip
+            - ./baigel:/app/baigel
             - ./model-assets:/app/model-assets
             - ./shared-assets:/app/shared-assets
             - ./pyproject.toml:/app/pyproject.toml
             - ./poetry.lock:/app/poetry.lock
         ports:
-            - "8702:80"
+            - "8703:80"
 
 volumes:
-    baistro_0_poetry:
-    baistro_0_pip:
+    baigel_0_poetry:
+    baigel_0_pip:
